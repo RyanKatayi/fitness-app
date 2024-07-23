@@ -19,7 +19,7 @@ const LoginForm = () => {
     if (error) {
       Alert.alert('Login Error', error.message);
     } else {
-      router.push('/tabs');
+      router.push('/(tabs)');
     }
   };
 

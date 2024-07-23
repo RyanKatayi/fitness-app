@@ -40,6 +40,7 @@ export default function RootLayout() {
           <Stack.Screen name="onboarding/EatWell" options={{ headerShown: false }}/>
           <Stack.Screen name="onboarding/ImproveSleepQuality" options={{ headerShown: false }}/>
           <Stack.Screen name="authentication/ForgotPasswordScreen" options={{ headerShown: false }} />
+          <Stack.Screen name="information/ProfileCompletion" options={{ headerShown: false }}/>
         </Stack>
       </ThemeProvider>
     </AuthProvider>

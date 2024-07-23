@@ -24,6 +24,7 @@ interface AuthProviderProps {
 }
 
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);
+export { AuthContext };
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
@@ -32,17 +33,18 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const getSession = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      setSession(session);
-      setUser(session?.user ?? null);
+    const restoreSession = async () => {
+      const { data } = await supabase.auth.getSession();
+      setSession(data.session);
+      setUser(data.session?.user ?? null);
 
-      if (session?.user) {
-        fetchUserProfile(session.user.id);
+      if (data.session?.user) {
+        fetchUserProfile(data.session.user.id);
       }
+      setLoading(false);
     };
 
-    getSession();
+    restoreSession();
 
     const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
@@ -53,8 +55,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         setProfile(null);
       }
     });
-
-    setLoading(false);
 
     return () => {
       authListener?.subscription.unsubscribe();
@@ -71,8 +71,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     if (error) {
       console.error('Error fetching profile:', error.message);
     }
-  
-    return data;
+    setProfile(data);
   };
   
   const signIn = async (email: string, password: string) => {

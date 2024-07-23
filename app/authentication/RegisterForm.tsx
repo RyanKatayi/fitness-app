@@ -13,7 +13,12 @@ const RegisterForm = () => {
   const [phoneNumber, setPhoneNumber] = useState('');
 
   const handleRegister = async () => {
-    const { data, error } = await supabase.auth.signUp({
+    if (!email || !password || !fullName || !phoneNumber) {
+      Alert.alert('Registration Error', 'Please fill all the fields');
+      return;
+    }
+
+    const { error } = await supabase.auth.signUp({
       email,
       password,
     });
@@ -21,18 +26,7 @@ const RegisterForm = () => {
     if (error) {
       Alert.alert('Registration Error', error.message);
     } else {
-      const userId = data.user?.id;
-      if (userId) {
-        const { error: profileError } = await supabase
-          .from('profiles')
-          .insert([{ id: userId, full_name: fullName, phone_number: phoneNumber }]);
-
-        if (profileError) {
-          Alert.alert('Profile Creation Error', profileError.message);
-        } else {
-          router.push('/authentication/SuccessScreen');
-        }
-      }
+      router.push('/information/ProfileCompletion');
     }
   };
 
@@ -57,15 +51,6 @@ const RegisterForm = () => {
       <TouchableOpacity onPress={handleRegister} style={styles.button}>
         <Text style={styles.buttonText}>Register</Text>
       </TouchableOpacity>
-      <Text style={styles.orText}>Or</Text>
-      <View style={styles.socialContainer}>
-        <TouchableOpacity onPress={() => {}} style={styles.socialButton}>
-          <Text style={styles.socialButtonText}>G</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => {}} style={styles.socialButton}>
-          <Text style={styles.socialButtonText}>F</Text>
-        </TouchableOpacity>
-      </View>
     </View>
   );
 };
