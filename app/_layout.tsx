@@ -40,7 +40,17 @@ export default function RootLayout() {
           <Stack.Screen name="onboarding/EatWell" options={{ headerShown: false }}/>
           <Stack.Screen name="onboarding/ImproveSleepQuality" options={{ headerShown: false }}/>
           <Stack.Screen name="authentication/ForgotPasswordScreen" options={{ headerShown: false }} />
+          <Stack.Screen name="authentication/LoginForm" options={{ headerShown: false }} />
+          <Stack.Screen name="authentication/RegisterForm" options={{ headerShown: false }} />
+          <Stack.Screen name="authentication/SuccessScreen" options={{ headerShown: false }} />
+          <Stack.Screen name="authentication/AuthForm" options={{ headerShown: false }} />
           <Stack.Screen name="information/ProfileCompletion" options={{ headerShown: false }}/>
+          {/* <Stack.Screen name="fitness/WorkoutsScreen" options={{ title: 'Workouts' }} />
+          <Stack.Screen name="fitness/AddWorkout" options={{ title: 'Add Workout' }} />
+          <Stack.Screen name="fitness/NutritionScreen" options={{ title: 'Nutrition' }} /> */}
+          <Stack.Screen name="fitnessScreens/AddMeal" options={{ title: 'Add Meal', headerShown: false, headerBackTitleVisible: true }} />
+          <Stack.Screen name="fitnessScreens/AddProgress" options={{ title: 'Add Progress' }} />
+          <Stack.Screen name="fitnessScreens/AddWorkout" options={{ title: 'Add Workout' }} />
         </Stack>
       </ThemeProvider>
     </AuthProvider>

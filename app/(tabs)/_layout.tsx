@@ -24,20 +24,29 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="search"
+        name="fitness/WorkoutsScreen"
         options={{
-          title: 'Search',
+          title: 'Workouts',
           tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'search' : 'search-outline'} color={color} />
+            <TabBarIcon name={focused ? 'barbell' : 'barbell-outline'} color={color} />
           ),
         }}
       />
       <Tabs.Screen
-        name="photo"
+        name="fitness/NutritionScreen"
         options={{
-          title: 'Photo',
+          title: 'Nutrition',
           tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'camera' : 'camera-outline'} color={color} />
+            <TabBarIcon name={focused ? 'nutrition' : 'nutrition-outline'} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="fitness/ProgressScreen"
+        options={{
+          title: 'Progress',
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon name={focused ? 'analytics' : 'analytics-outline'} color={color} />
           ),
         }}
       />
